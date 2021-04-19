@@ -218,6 +218,8 @@ def rename_rocketchat_room(event: Event):
     rocket_chat = RocketChat(api_url)
     bot = rocket_chat.check_or_create_bot()
     data = rocket_chat.get_token(bot)
+    bot_token = data['token']
+    bot_id = data['res']['data']['userId']
 
     res = requests.post(
         rocket_chat.api_url + '/api/v1/groups.rename',
