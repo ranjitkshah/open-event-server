@@ -527,10 +527,11 @@ class EventDetail(ResourceDetail):
         """
         print(data["name"])
         print(event.name)
+        event_id = str(event.id)
         if data["name"] != event.name:
             from .helpers.tasks import rocketchat_room
 
-            rocketchat_room.delay(event=event)
+            rocketchat_room.delay(event_id)
         is_date_updated = (
             data.get('starts_at') != event.starts_at
             or data.get('ends_at') != event.ends_at

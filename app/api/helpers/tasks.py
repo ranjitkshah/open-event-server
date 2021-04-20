@@ -665,7 +665,8 @@ def delete_translations(self, zip_file_path):
 
 
 @celery_task(name='rename.event')
-def rocketchat_room(event):
+def rocketchat_room(event_id):
+    event = db.session.query(Event).filter_by(id=int(event_id)).first()
     try:
         rename_rocketchat_room(event=event)
     except:
