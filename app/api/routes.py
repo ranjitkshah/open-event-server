@@ -116,6 +116,7 @@ from app.api.feedbacks import (
     FeedbackRelationship,
 )
 from app.api.full_text_search.events import EventSearchResultList
+from app.api.group_followers import GroupFollowerListPost
 from app.api.groups import GroupDetail, GroupList, GroupListPost, GroupRelationship
 from app.api.import_jobs import ImportJobDetail, ImportJobList
 from app.api.mails import MailDetail, MailList
@@ -1039,6 +1040,13 @@ api.route(
     'user_favourite_session_list_post',
     '/user-favourite-sessions',
 )
+
+api.route(
+    UserRelationship,
+    'user_user_followed_groups',
+    '/users/<int:id>/relationships/followed-groups',
+)
+
 api.route(
     UserFavouriteSessionList,
     'user_favourite_sessions_list',
@@ -1470,6 +1478,13 @@ api.route(
     GroupRelationship,
     'group_user',
     '/groups/<int:id>/relationships/user',
+)
+
+# user groups followed
+api.route(
+    GroupFollowerListPost,
+    'user_groups_followed_list_post',
+    '/user-groups-followed',
 )
 
 
