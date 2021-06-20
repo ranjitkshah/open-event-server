@@ -83,6 +83,7 @@ class EventSchemaPublic(SoftDeletionSchema):
     is_billing_info_mandatory = fields.Bool(default=False)
     is_donation_enabled = fields.Bool(default=False)
     is_chat_enabled = fields.Bool(default=False)
+    is_document_enabled = fields.Boolean(default=False)
     chat_room_name = fields.Str(dump_only=True)
     can_pay_by_paypal = fields.Bool(default=False)
     can_pay_by_stripe = fields.Bool(default=False)
@@ -456,4 +457,13 @@ class EventSchema(EventSchemaPublic):
         schema='UsersEventsRolesSchema',
         type_='users-events-roles',
         many=True,
+    )
+    event_documents = Relationship(
+        self_view='v1.event_event_documents',
+        self_view_kwargs={'id': '<id>'},
+        related_view='v1.event_document_list',
+        related_view_kwargs={'event_id': '<id>'},
+        schema='EventDocumentSchema',
+        many=True,
+        type_='event-document',
     )

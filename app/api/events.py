@@ -37,6 +37,7 @@ from app.models.discount_code import DiscountCode
 from app.models.email_notification import EmailNotification
 from app.models.event import Event
 from app.models.event_copyright import EventCopyright
+from app.models.event_document import EventDocument
 from app.models.event_invoice import EventInvoice
 from app.models.exhibitor import Exhibitor
 from app.models.faq import Faq
@@ -462,6 +463,7 @@ def get_id(view_kwargs):
         (Feedback, 'feedback_id'),
         (VideoStream, 'video_stream_id'),
         (Exhibitor, 'exhibitor_id'),
+        (EventDocument, 'event_document_id'),
     ]
     for model, identifier in lookup_list:
         set_event_id(model, identifier, view_kwargs)

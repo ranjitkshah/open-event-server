@@ -65,6 +65,12 @@ from app.api.event_copyright import (
     EventCopyrightListPost,
     EventCopyrightRelationshipRequired,
 )
+from app.api.event_documents import (
+    EventDocumentDetail,
+    EventDocumentList,
+    EventDocumentListPost,
+    EventDocumentRelationship,
+)
 from app.api.event_image_sizes import EventImageSizeDetail
 from app.api.event_invoices import (
     EventInvoiceDetail,
@@ -756,6 +762,7 @@ api.route(
     '/video-streams/<int:video_stream_id>/event',
     '/users-events-roles/<int:users_events_roles_id>/event',
     '/exhibitors/<int:exhibitor_id>/event',
+    '/event-documents/<int:event_document_id>/event',
 )
 api.route(
     EventRelationship,
@@ -979,6 +986,12 @@ api.route(
     'event_exhibitor',
     '/events/<int:id>/relationships/exhibitors',
     '/events/<identifier>/relationships/exhibitors',
+)
+api.route(
+    EventRelationship,
+    'event_event_documents',
+    '/events/<int:id>/relationships/event-documents',
+    '/events/<identifier>/relationships/event-documents',
 )
 
 # microlocations
@@ -1271,6 +1284,26 @@ api.route(
     EventCopyrightRelationshipRequired,
     'copyright_event',
     '/event-copyrights/<int:id>/relationships/event',
+)
+
+
+# event_document
+api.route(EventDocumentListPost, 'event_document_list_post', '/event-documents')
+api.route(
+    EventDocumentList,
+    'event_document_list',
+    '/events/<int:event_id>/event-documents',
+    '/events/<event_identifier>/event-documents',
+)
+api.route(
+    EventDocumentDetail,
+    'event_document_detail',
+    '/event-documents/<int:id>',
+)
+api.route(
+    EventDocumentRelationship,
+    'event_document_event',
+    '/event-documents/<int:id>/relationships/event',
 )
 
 # custom_placeholder
