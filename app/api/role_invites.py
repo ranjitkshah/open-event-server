@@ -176,11 +176,16 @@ def accept_invite():
 
         if not uer:
             if role_invite.role_name == 'owner':
+                print(event, role)
                 past_owner = UsersEventsRoles.query.filter_by(
                     event=event, role=role
                 ).first()
+                oldrole = Role.query.filter_by(name='organizer').first()
+                prevuser = User.query.filter_by(id=past_owner.user_id).first()
                 if past_owner:
                     delete_previous_uer(past_owner)
+                    puer = UsersEventsRoles(user=prevuser, event=event, role=oldrole)
+                    save_to_db(puer, 'User Event Role changed')
             role_invite.status = "accepted"
             save_to_db(role_invite, 'Role Invite Accepted')
             # reset the group of event
